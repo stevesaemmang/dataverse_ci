@@ -57,3 +57,18 @@ docker run -v `pwd`:/input stevesaemmang/dataverse_ci importsolution
 
 ```
 
+## Use in GitHub Actions
+### Deploy solution file
+```
+jobs:
+  deploy_powerapp:
+    name: DeployPowerAppSolution
+
+    runs-on: ubuntu-latest
+    container: stevesaemmang/dataverse_ci
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+      run: dataverse_ci importsolution --clientId 00000000-0000-0000-0000-000000000000 --tenantId 00000000-0000-0000-0000-000000000000 --clientSecret abcdefg1234567  --environment https://mypowerapp.crm4.dynamics.com --solutionfile Test_managed.zip --overwriteunmanaged --publishworkflows
+      working-directory: /.
+```
