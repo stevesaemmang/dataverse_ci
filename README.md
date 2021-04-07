@@ -64,11 +64,12 @@ jobs:
   deploy_powerapp:
     name: DeployPowerAppSolution
 
-    runs-on: ubuntu-latest
-    container: stevesaemmang/dataverse_ci
+    runs-on: ubuntu-latest    
     steps:
-    - uses: actions/checkout@v2
-    - name: Deploy
-      run: dataverse_ci importsolution --clientId 00000000-0000-0000-0000-000000000000 --tenantId 00000000-0000-0000-0000-000000000000 --clientSecret abcdefg1234567  --environment https://mypowerapp.crm4.dynamics.com --solutionfile Test_managed.zip --overwriteunmanaged --publishworkflows
-      working-directory: /.
+      - uses: actions/checkout@v2
+      - name: Step with docker to echo a string
+        uses: docker://stevesaemmang/dataverse_ci:latest
+        with:
+          entrypoint: /dataverse_ci
+          args: importsolution --clientId 00000000-0000-0000-0000-000000000000 --tenantId 00000000-0000-0000-0000-000000000000 --clientSecret abcdefg1234567 --environment https://mypowerapp.crm4.dynamics.com --solutionfile Test_managed.zip --overwriteunmanaged --publishworkflows
 ```
