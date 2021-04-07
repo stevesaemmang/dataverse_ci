@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v2
-      - name: Step with docker to echo a string
+      - name: Deploy solution to dataverse
         uses: docker://stevesaemmang/dataverse_ci:latest
         with:
           entrypoint: /dataverse_ci
